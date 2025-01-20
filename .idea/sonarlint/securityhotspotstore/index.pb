@@ -11,3 +11,5 @@ L
 tests/grid-stability.test.ts,9/9/99df55c16054e3feb0f5dc2f0e26567bb900f2fa
 M
 tests/energy-transfer.test.ts,a/5/a53c085347cd5c254b0823313eba31d0bbac29d7
+O
+tests/universe-registry.test.ts,e/5/e50171938d7dbc06d76964c674f4a01d47778965
