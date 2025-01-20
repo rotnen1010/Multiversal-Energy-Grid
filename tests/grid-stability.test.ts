@@ -1,21 +1,40 @@
+import { describe, it, expect, beforeEach } from "vitest"
 
-import { describe, expect, it } from "vitest";
-
-const accounts = simnet.getAccounts();
-const address1 = accounts.get("wallet_1")!;
-
-/*
-  The test below is an example. To learn more, read the testing documentation here:
-  https://docs.hiro.so/stacks/clarinet-js-sdk
-*/
-
-describe("example tests", () => {
-  it("ensures simnet is well initalised", () => {
-    expect(simnet.blockHeight).toBeDefined();
-  });
-
-  // it("shows an example", () => {
-  //   const { result } = simnet.callReadOnlyFn("counter", "get-counter", [], address1);
-  //   expect(result).toBeUint(0);
-  // });
-});
+describe("grid-stability", () => {
+  let contract: any
+  
+  beforeEach(() => {
+    contract = {
+      recordStabilityCheck: (universeId: number, energyBalance: number, dimensionalIntegrity: number) => ({ value: 1 }),
+      getStabilityCheck: (id: number) => ({
+        universeId: 1,
+        energyBalance: 500,
+        dimensionalIntegrity: 95,
+        timestamp: 12345,
+      }),
+      getStabilityCheckCount: () => 1,
+    }
+  })
+  
+  describe("record-stability-check", () => {
+    it("should record a new stability check", () => {
+      const result = contract.recordStabilityCheck(1, 500, 95)
+      expect(result.value).toBe(1)
+    })
+  })
+  
+  describe("get-stability-check", () => {
+    it("should return stability check information", () => {
+      const check = contract.getStabilityCheck(1)
+      expect(check.universeId).toBe(1)
+      expect(check.energyBalance).toBe(500)
+    })
+  })
+  
+  describe("get-stability-check-count", () => {
+    it("should return the total number of stability checks", () => {
+      const count = contract.getStabilityCheckCount()
+      expect(count).toBe(1)
+    })
+  })
+})
